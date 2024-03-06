@@ -202,7 +202,7 @@ int main(){
     Appointment<std::string> a5("Chris Lynn","09//12/2023","12:00PM","879455714");
    s1.schedule(a4);
    s1.removeRecent();
-   s1.display();*/
+   s1.display();
 }
 
 
