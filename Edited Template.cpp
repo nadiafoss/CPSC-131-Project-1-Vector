@@ -1,3 +1,6 @@
+// Nadia Foss
+// CWID: 884605973
+
 #include<iostream>
 #include<string>
 #include<vector>
