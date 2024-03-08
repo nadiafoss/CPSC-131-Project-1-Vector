@@ -27,7 +27,7 @@ public:
     void addNewItem(Item<T> newItem) {
         for (Item<T>& item : items) {
             if (item.name == newItem.name) {
-                std::cout << "Item is already present in inventory" << std::endl;
+                std::cout << "Item is already present in inventory\n" << std::endl;
                 return;
             }
         }
@@ -67,21 +67,39 @@ public:
     }
 
     int Total() {
-        int total = 0;
-        for (const Item<T>& item : items) {
-            total += item.quantity;
-        }
-        return total;
-    }
-
-    void searchItem(T itemname) {
-        for (const Item<T>& item : items) {
-            if (item.name == itemname) {
-                return;
+    std::vector<T> uniqueItems;
+    for (const Item<T>& item : items) {
+        bool found = false;
+        for (const T& name : uniqueItems) {
+            if (name == item.name) {
+                found = true;
+                break;
             }
         }
-        throw "Item not found\n";
+        if (!found) {
+            uniqueItems.push_back(item.name);
+        }
     }
+    int total = uniqueItems.size();
+    std::cout << "Total number of items in inventory = " << total << std::endl;
+    std::cout << std::endl;
+    return total;
+}
+
+    void searchItem(T itemname) {
+    for (const Item<T>& item : items) {
+        if (item.name == itemname) {
+            std::cout << "Query for " << itemname << std::endl;
+            std::cout << "Item = " << item.name << std::endl;
+            std::cout << "Expiration Date = " << item.expiration << std::endl;
+            std::cout << "Category = " << item.category << std::endl;
+            std::cout << "Quantity = " << item.quantity << std::endl;
+            std::cout << std::endl;
+            return;
+        }
+    }
+    throw "Item not found!!\n";
+}
 
     void displayItems(){
         std::cout<<"-------Inventory-------"<<std::endl;
@@ -115,7 +133,7 @@ public:
     void schedule(Appointment<T> newAppointment) {
         for (Appointment<T>& appointment : ap) {
             if (appointment.CWID == newAppointment.CWID) {
-                std::cout << "You have already scheduled an appointment!!!" << std::endl;
+                std::cout << "You have already scheduled an appointment!!!\n" << std::endl;
                 return;
             }
         }
@@ -123,14 +141,16 @@ public:
     }
 
     int Total_appointments(T date, T time) {
-        int total = 0;
-        for (const Appointment<T>& appointment : ap) {
-            if (appointment.ap_date == date && appointment.ap_time == time) {
-                total++;
-            }
+    int total = 0;
+    for (const Appointment<T>& appointment : ap) {
+        if (appointment.ap_date == date && appointment.ap_time == time) {
+            total++;
         }
-        return total;
     }
+    std::cout << "Total appointments = " << total << std::endl;
+    std::cout << std::endl;
+    return total;
+}
 
     void removeRecent() {
         if (!ap.empty()) {
@@ -139,13 +159,14 @@ public:
     }
 
     void display(){
-        std::cout<<"-------Appointments-------"<<std::endl;
-        std::cout<<std::left<<std::setw(20)<<"Name"<<std::setw(15)<<"Date"<<std::setw(15)<<"Time"<<std::setw(15)<<"CWID"<<std::endl;
-        for(int i=0; i<ap.size();i++){
-            std::cout<<std::left <<
-                std::setw(20)<<ap[i].c_name<<std::setw(15)<<ap[i].ap_date<<std::setw(15)<<ap[i].ap_time<<std::setw(15)<<ap[i].CWID<<std::endl;
-        }
+    std::cout<<"-------Appointments-------"<<std::endl;
+    std::cout<<std::left<<std::setw(20)<<"Name"<<std::setw(15)<<"Date"<<std::setw(15)<<"Time"<<std::setw(15)<<"CWID"<<std::endl;
+    for(int i=0; i<ap.size();i++){
+        std::cout<<std::left <<
+            std::setw(20)<<ap[i].c_name<<std::setw(15)<<ap[i].ap_date<<std::setw(15)<<ap[i].ap_time<<std::setw(15)<<ap[i].CWID<<std::endl;
     }
+    std::cout << std::endl;
+}
 };
 
 int main(){
