@@ -41,7 +41,7 @@ public:
                 return;
             }
         }
-        throw "Item not found";
+        throw "Item not found\n";
     }
 
     void updateItem(T itemname, T expiration, T category, int quantity) {
@@ -53,7 +53,7 @@ public:
                 return;
             }
         }
-        throw "Item not found";
+        throw "Item not found\n";
     }
 
     void removeItem(T itemname) {
@@ -63,7 +63,7 @@ public:
                 return;
             }
         }
-        throw "Item not found";
+        throw "Item not found\n";
     }
 
     int Total() {
@@ -80,7 +80,7 @@ public:
                 return;
             }
         }
-        throw "Item not found!!";
+        throw "Item not found\n";
     }
 
     void displayItems(){
@@ -90,6 +90,7 @@ public:
             std::cout<<std::left <<
                 std::setw(20)<<items[i].name<<std::setw(15)<<items[i].expiration<<std::setw(15)<<items[i].quantity<<std::setw(15)<<items[i].category<<std::endl;
         }
+        std::cout << std::endl;
     }
 };
 
@@ -148,7 +149,6 @@ public:
 };
 
 int main(){
-    /* Remove comments and run following test cases */
     Inventory<std::string> i1;
     Item<std::string> I1("Protien Bar","05/09/2023","Snacks",4);
     i1.addNewItem(I1);
@@ -207,5 +207,3 @@ int main(){
    s1.removeRecent();
    s1.display();
 }
-
-
